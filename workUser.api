@@ -1,3 +1,16 @@
+type (
+	CreateUserReq {
+		Name string `json:"name"`
+		Pwd  string `json:"name"`
+	}
+
+	CreateUserResp {
+		Code    int    `json:"code"`
+		Message string `json:"message"`
+		Data    string `json:"data"`
+	}
+)
+
 type Request {
 	Name string `path:"name,options=you|me"`
 }
@@ -9,14 +22,6 @@ type Response {
 }
 
 service workUser-api {
-	@handler WorkUserHandler
-	get /from/:name(Request) returns (Response);
-	@handler UserListHandler
-	post /user/list(Request) returns (Response);
-	@handler UserFindHandler
-	get /user/find(Request) returns (Response);
-	@handler UserUpdateHandler
-	post /user/update(Request) returns (Response);
-	@handler UserDeleteHandler
-	delete /user/delete(Request) returns (Response);
+	@handler CreateUser
+	post /user/create(CreateUserReq) returns(CreateUserResp)
 }

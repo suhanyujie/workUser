@@ -13,29 +13,9 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 	engine.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
-				Path:    "/from/:name",
-				Handler: WorkUserHandler(serverCtx),
-			},
-			{
 				Method:  http.MethodPost,
-				Path:    "/user/list",
-				Handler: UserListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/user/find",
-				Handler: UserFindHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/update",
-				Handler: UserUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodDelete,
-				Path:    "/user/delete",
-				Handler: UserDeleteHandler(serverCtx),
+				Path:    "/user/create",
+				Handler: CreateUserHandler(serverCtx),
 			},
 		},
 	)

@@ -3,6 +3,9 @@
 
 主要提供用户的管理，包含用户的新增、信息修改、删除、三方用户接入等接口等
 
+## 启动
+* `go run workuser.go -f etc/workuser-api.yaml`
+
 ## 功能 list
 * [ ] 用户新增
 * [ ] 用户修改
@@ -35,3 +38,28 @@
 * id, org_name
 
 >用户组织关联表
+
+### 接口
+
+```
+service workUser-api {
+	@handler CreateUser
+	post /user/create(CreateUserReq) returns (CreateUserResp);
+	@handler QueryUser
+	post /user/list(Request) returns (Response);
+	@handler FindUser
+	get /user/find(Request) returns (Response);
+	@handler UpdateUser
+	post /user/update(Request) returns (Response);
+	@handler DeleteUser
+	delete /user/delete(Request) returns (Response);
+}
+```
+
+#### 新增用户
+
+#### 修改用户信息
+#### 删除用户
+
+## 参考资料
+* https://github.com/tal-tech/zero-doc

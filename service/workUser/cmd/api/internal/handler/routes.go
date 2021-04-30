@@ -4,7 +4,7 @@ package handler
 import (
 	"net/http"
 
-	"github.com/suhanyujie/workUser/internal/svc"
+	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/svc"
 
 	"github.com/tal-tech/go-zero/rest"
 )
@@ -16,6 +16,11 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/user/create",
 				Handler: CreateUserHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/user/find/:userId",
+				Handler: FindUserHandler(serverCtx),
 			},
 		},
 	)

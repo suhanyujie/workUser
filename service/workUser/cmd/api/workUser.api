@@ -9,6 +9,11 @@ type (
 		Message string `json:"message"`
 		Data    string `json:"data"`
 	}
+	FindUserResp {
+		Code    int    `json:"code"`
+		Message string `json:"message"`
+		Data    string `json:"data"`
+	}
 )
 
 type Request {
@@ -24,4 +29,6 @@ type Response {
 service workUser-api {
 	@handler CreateUser
 	post /user/create(CreateUserReq) returns(CreateUserResp)
+	@handler FindUser
+	get /user/find/:userId () returns(FindUserResp)
 }

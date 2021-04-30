@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/suhanyujie/workUser/internal/config"
-	"github.com/suhanyujie/workUser/internal/handler"
-	"github.com/suhanyujie/workUser/internal/svc"
+	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/config"
+	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/handler"
+	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/svc"
 
 	"github.com/tal-tech/go-zero/core/conf"
 	"github.com/tal-tech/go-zero/rest"

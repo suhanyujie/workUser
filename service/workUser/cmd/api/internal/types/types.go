@@ -12,6 +12,12 @@ type CreateUserResp struct {
 	Data    string `json:"data"`
 }
 
+type FindUserResp struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+	Data    string `json:"data"`
+}
+
 type Request struct {
 	Name string `path:"name,options=you|me"`
 }

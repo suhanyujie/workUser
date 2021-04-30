@@ -15,29 +15,7 @@
 * [ ] 三方用户删除
 
 ## 设计
-### 表结构
-> 用户主表
 
-* id
-* username
-* nick_name
-* status
-* pwd
-* token
-* ext
-* third_flag
-* create_time
-* update_time
-* is_delete
-
->用户信息表
-
->部门表
->用户部门表
->组织表
-* id, org_name
-
->用户组织关联表
 
 ### 接口
 
@@ -61,5 +39,12 @@ service workUser-api {
 #### 修改用户信息
 #### 删除用户
 
+## 遇到的问题
+* 使用路由不确定如何获取参数，如 `/user/find/:userId`，如何获取 userId 呢？
+* 没有 orm 的介绍，不知道如何 migration
+
+
+
 ## 参考资料
 * https://github.com/tal-tech/zero-doc
+* https://github.com/tal-tech/zero-doc/blob/main/doc/shorturl.md

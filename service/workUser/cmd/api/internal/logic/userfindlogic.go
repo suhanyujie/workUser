@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"github.com/suhanyujie/workUser/internal/svc"
-	"github.com/suhanyujie/workUser/internal/types"
+	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/svc"
+	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )

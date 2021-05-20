@@ -48,3 +48,4 @@ service workUser-api {
 ## 参考资料
 * https://github.com/tal-tech/zero-doc
 * https://github.com/tal-tech/zero-doc/blob/main/doc/shorturl.md
+* 文档 https://zero.gocn.vip/zero/

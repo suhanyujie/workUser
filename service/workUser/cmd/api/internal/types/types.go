@@ -2,8 +2,8 @@
 package types
 
 type CreateUserReq struct {
-	Name string `json:"name"`
-	Pwd  string `json:"name"`
+	UserName string `json:"userName"`
+	Pwd      string `json:"pwd"`
 }
 
 type CreateUserResp struct {

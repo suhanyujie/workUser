@@ -49,3 +49,4 @@ service workUser-api {
 * https://github.com/tal-tech/zero-doc
 * https://github.com/tal-tech/zero-doc/blob/main/doc/shorturl.md
 * 文档 https://zero.gocn.vip/zero/
+* go-zero 实现的中台 https://github.com/jackluo2012/datacenter

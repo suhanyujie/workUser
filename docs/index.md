@@ -27,5 +27,5 @@ mall // 工程名称
     │   └── model
 ```
 
-model 目录位于 cmd 的统同级目录。
+model 目录位于 cmd 的**同级**目录。
 

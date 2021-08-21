@@ -7,15 +7,20 @@ type CreateUserReq struct {
 }
 
 type CreateUserResp struct {
-	Code    int    `json:"code"`
-	Message string `json:"message"`
-	Data    string `json:"data"`
+	Code    int     `json:"code"`
+	Message string  `json:"message"`
+	Data    OneUser `json:"data"`
 }
 
 type FindUserResp struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
 	Data    string `json:"data"`
+}
+
+type OneUser struct {
+	Id       int    `json:"id"`
+	UserName string `json:"userName"`
 }
 
 type Request struct {

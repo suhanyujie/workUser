@@ -6,6 +6,11 @@
 ## 启动
 * `go run workuser.go -f etc/workuser-api.yaml`
 
+## 开发三部曲
+### 创建网关
+### 创建服务的 rpc
+### 编写服务逻辑
+
 ## 功能 list
 * [ ] 用户新增
 * [ ] 用户修改
@@ -13,9 +18,6 @@
 * [ ] 三方用户新增/同步
 * [ ] 三方用户修改
 * [ ] 三方用户删除
-
-## 设计
-
 
 ### 接口
 
@@ -48,5 +50,5 @@ service workUser-api {
 ## 参考资料
 * https://github.com/tal-tech/zero-doc
 * https://github.com/tal-tech/zero-doc/blob/main/doc/shorturl.md
-* 文档 https://zero.gocn.vip/zero/
+* 文档 https://go-zero.dev/cn/quick-start.html 
 * go-zero 实现的中台 https://github.com/jackluo2012/datacenter

@@ -24,12 +24,16 @@ func NewCreateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) CreateU
 	}
 }
 
+// CreateUser 新增用户，主要用于注册用户使用
 func (l *CreateUserLogic) CreateUser(req types.CreateUserReq) (*types.CreateUserResp, error) {
 	// todo: add your logic here and delete this line
 
 	return &types.CreateUserResp{
 		Code:    constvar.Ok,
 		Message: "success",
-		Data:    "some data",
+		Data: types.OneUser{
+			Id:       0,
+			UserName: "",
+		},
 	}, nil
 }

@@ -11,6 +11,8 @@ import (
 	"github.com/tal-tech/go-zero/tools/goctl/model/sql/builderx"
 )
 
+// user mode 的实现可以参考 https://github.com/jackluo2012/datacenter/blob/main/user/model/appusermodel.go
+
 var (
 	workUserFieldNames          = builderx.FieldNames(&WorkUser{})
 	workUserRows                = strings.Join(workUserFieldNames, ",")

@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/suhanyujie/workUser/service/workUser/model"
 
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/config"
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/handler"
@@ -25,6 +26,11 @@ func main() {
 	defer server.Stop()
 
 	handler.RegisterHandlers(server, ctx)
+	// 检查数据库迁移
+	if err := model.Initial(c.Mysql.DataSource); err != nil {
+		fmt.Printf("%+v", err)
+		return
+	}
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()

@@ -1,3 +1,7 @@
 Name: workUser-api
 Host: 0.0.0.0
 Port: 8001
+
+Mysql:
+  # dbuser:dbpassword@tcp(dbhost:dbport)/databasename?charset=utf8
+  DataSource: root:root@tcp(localhost:3306)/work_user?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai

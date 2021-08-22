@@ -17,7 +17,7 @@ type (
 	}
 
 	OneUser {
-		Id       int    `json:"id"`
+		Id       int64  `json:"id"`
 		UserName string `json:"userName"`
 	}
 )

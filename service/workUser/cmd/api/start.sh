@@ -7,3 +7,5 @@ go build -o server
 ./server -f=etc/workuser-api.yaml &
 
 wait
+
+#go run workuser.go -f=etc/workuser-api.yaml

@@ -19,7 +19,7 @@ type FindUserResp struct {
 }
 
 type OneUser struct {
-	Id       int    `json:"id"`
+	Id       int64  `json:"id"`
 	UserName string `json:"userName"`
 }
 

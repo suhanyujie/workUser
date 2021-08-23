@@ -21,9 +21,9 @@ CREATE DATABASE `work_user` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin';
 * ext
 * avatar
 * sex
-* create_time
-* update_time
-* delete_time
+* created_at
+* updated_at
+* deleted_at
 
 ```sql
 CREATE TABLE `work_user`.`work_user`  (
@@ -35,22 +35,13 @@ CREATE TABLE `work_user`.`work_user`  (
   `token` varchar(50) NOT NULL DEFAULT '' COMMENT '加密的 token',
   `avatar` varchar(200) NOT NULL DEFAULT '' COMMENT '头像地址',
   `sex` varchar(10) NOT NULL DEFAULT '' COMMENT '性别',
-  `create_time` datetime not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `delete_time` datetime default null COMMENT '删除时间',
+  `created_at` datetime not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updated_at` datetime not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `deleted_at` datetime default null COMMENT '删除时间',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `user_name_idx`(`user_name`) USING BTREE
 );
 ```
-
->用户信息表
-
->部门表
->用户部门表
->组织表
-* id, org_name
-
->用户组织关联表
 
 ## 使用 gorm
 由于 go-zero 自带的 sqlx 不太好用，打算还是使用自己更熟悉的 [gorm](https://gorm.io/zh_CN/docs/)。
@@ -95,6 +86,19 @@ type BaseModel struct {
 ```
 func (WorkUser) TableName() string {
 	return "work_user"
+}
+```
+
+随后，你只需按正常逻辑编写增、删、改、查的方法了。例如创建用户：
+
+```
+// Insert 创建
+func (_this *WorkUser) Insert(user WorkUser) (*WorkUser, error) {
+	err := DB.Create(&user).Error
+	if err != nil {
+		return nil, errors.Wrap(err, "select error. ")
+	}
+	return &user, nil
 }
 ```
 

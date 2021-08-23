@@ -59,8 +59,6 @@ func (_this *WorkUser) Insert(user WorkUser) (*WorkUser, error) {
 	return &user, nil
 }
 
-// gorm 实现 WorkUser 的修改 todo
-
 // FindOne 通过 id 查询一条数据
 func (_this *WorkUser) FindOne(id int64) (*WorkUser, error) {
 	var user *WorkUser
@@ -80,8 +78,11 @@ func (_this *WorkUser) FindOneByUserName(userName string) ([]WorkUser, error) {
 	return users, nil
 }
 
-// todo
-func (_this *WorkUser) Update(data WorkUser) error {
+// Update 通过主键修改
+func (_this *WorkUser) Update(id int64, updateData map[string]interface{}) error {
+	if err := DB.Table(_this.TableName()).Where("id=?", id).Updates(updateData).Error; err != nil {
+		return errors.Wrap(err, "update error. ")
+	}
 	return nil
 }
 

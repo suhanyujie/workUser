@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 
-	"github.com/pkg/errors"
 	"github.com/suhanyujie/workUser/common/stringx"
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/svc"
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/types"
@@ -32,27 +31,19 @@ func (l *CreateUserLogic) CreateUser(req types.CreateUserReq) (*types.CreateUser
 		Avatar:   "",
 		UserName: req.UserName,
 		Pwd:      stringx.Md5Str(req.Pwd),
-		Nickname: "",
+		Nickname: req.UserName,
 		Sex:      0,
 	})
 	if err != nil {
 		return nil, err
-	}
-	dataId, err := insertRes.LastInsertId()
-	if err != nil {
-		return nil, errors.Wrap(err, "get lastInsertId error")
-	}
-	user, err := l.svcCtx.WorkUserModel.FindOne(dataId)
-	if err != nil {
-		return nil, errors.Wrap(err, "FindOne error")
 	}
 
 	return &types.CreateUserResp{
 		Code:    constvar.Ok,
 		Message: "success",
 		Data: types.OneUser{
-			Id:       int64(user.ID),
-			UserName: user.UserName,
+			Id:       int64(insertRes.ID),
+			UserName: insertRes.UserName,
 		},
 	}, nil
 }

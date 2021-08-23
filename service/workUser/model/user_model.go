@@ -1,14 +1,10 @@
 package model
 
 import (
-	"database/sql"
 	"fmt"
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/tal-tech/go-zero/core/stores/cache"
-	"github.com/tal-tech/go-zero/core/stores/sqlc"
-	"github.com/tal-tech/go-zero/core/stores/sqlx"
 	"github.com/tal-tech/go-zero/core/stringx"
 	"github.com/tal-tech/go-zero/tools/goctl/model/sql/builderx"
 )
@@ -18,24 +14,19 @@ import (
 var (
 	workUserFieldNames          = builderx.FieldNames(&WorkUser{})
 	workUserRows                = strings.Join(workUserFieldNames, ",")
-	workUserRowsExpectAutoSet   = strings.Join(stringx.Remove(workUserFieldNames, "pwd", "create_time", "update_time", "delete_time"), ",")
-	workUserRowsWithPlaceHolder = strings.Join(stringx.Remove(workUserFieldNames, "pwd", "create_time", "update_time", "delete_time"), "=?,") + "=?"
+	workUserRowsExpectAutoSet   = strings.Join(stringx.Remove(workUserFieldNames, "pwd", "created_at", "updated_at", "deleted_at"), ",")
+	workUserRowsWithPlaceHolder = strings.Join(stringx.Remove(workUserFieldNames, "pwd", "created_at", "updated_at", "deleted_at"), "=?,") + "=?"
 
-	cacheWorkUserInfoPrefix = "cache#AppUser#uid#"
+	cacheWorkUserInfoPrefix = "cache:WorkUser:id:"
 )
 
 type (
-	WorkUserModel interface {
-		Insert(data WorkUser) (sql.Result, error)
+	WorkUserModelIf interface {
+		Insert(data WorkUser) (*WorkUser, error)
 		FindOne(id int64) (*WorkUser, error)
 		FindOneByUserName(user string) (*WorkUser, error)
 		Update(data WorkUser) error
 		Delete(id int64) error
-	}
-
-	defaultWorkUserModel struct {
-		conn  sqlx.SqlConn
-		table string
 	}
 
 	WorkUser struct {
@@ -55,57 +46,49 @@ func (WorkUser) TableName() string {
 	return "work_user"
 }
 
-func NewWorkUserModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultWorkUserModel {
-	return &defaultWorkUserModel{
-		conn:  conn,
-		table: "work_user",
+func NewWorkUserModel() *WorkUser {
+	return &WorkUser{}
+}
+
+// Insert 创建
+func (_this *WorkUser) Insert(user WorkUser) (*WorkUser, error) {
+	err := DB.Create(&user).Error
+	if err != nil {
+		return nil, errors.Wrap(err, "select error. ")
 	}
+	return &user, nil
 }
 
-func (rc *defaultWorkUserModel) Insert(data WorkUser) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", rc.table, workUserRows)
-	ret, err := rc.conn.Exec(query, data.UserName, data.Pwd)
+// gorm 实现 WorkUser 的修改 todo
 
-	return ret, errors.Wrap(err, "insert error")
-}
-
-func (rc *defaultWorkUserModel) FindOne(id int64) (*WorkUser, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", workUserRows, rc.table)
-	var resp WorkUser
-	err := rc.conn.QueryRow(&resp, query, id)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
+// FindOne 通过 id 查询一条数据
+func (_this *WorkUser) FindOne(id int64) (*WorkUser, error) {
+	var user *WorkUser
+	if err := DB.Where("id=?", id).Find(&user).Error; err != nil {
+		return nil, errors.Wrap(err, "findOne error. ")
 	}
+	return user, nil
 }
 
-func (rc *defaultWorkUserModel) FindOneByUserName(userName string) (*WorkUser, error) {
-	query := fmt.Sprintf("select %s from %s where `user_name` LIKE ? limit 1", workUserRows, rc.table)
-	var resp WorkUser
-	userNameLikeStr := fmt.Sprintf("%%%s%%", userName)
-	err := rc.conn.QueryRow(&resp, query, userNameLikeStr)
-	switch err {
-	case nil:
-		return &resp, nil
-	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
-	default:
-		return nil, err
+// FindOneByUserName 通过用户名模糊匹配用户
+func (_this *WorkUser) FindOneByUserName(userName string) ([]WorkUser, error) {
+	users := make([]WorkUser, 0)
+	likeFmt := fmt.Sprintf("%%%s%%", userName)
+	if err := DB.Table(_this.TableName()).Where("user_name like ?", likeFmt).Find(&users).Error; err != nil {
+		return nil, errors.Wrap(err, "findOne error. ")
 	}
+	return users, nil
 }
 
-func (rc *defaultWorkUserModel) Update(data WorkUser) error {
-	query := fmt.Sprintf("update %s SET %s where id=?", rc.table, workUserRowsWithPlaceHolder)
-	_, err := rc.conn.Exec(query, data.Nickname, data.ID)
-	return err
+// todo
+func (_this *WorkUser) Update(data WorkUser) error {
+	return nil
 }
 
-func (rc *defaultWorkUserModel) Delete(id int64) error {
-	query := fmt.Sprintf("delete from %s where id=?", rc.table)
-	_, err := rc.conn.Exec(query, id)
-	return err
+// Delete 通过主键删除
+func (_this *WorkUser) Delete(id int64) error {
+	if err := DB.Table(_this.TableName()).Where("id=?", id).Delete(NewWorkUserModel()).Error; err != nil {
+		return errors.Wrap(err, "delete error. ")
+	}
+	return nil
 }

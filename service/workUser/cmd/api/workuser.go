@@ -26,7 +26,8 @@ func main() {
 	defer server.Stop()
 
 	handler.RegisterHandlers(server, ctx)
-	// 检查数据库迁移
+
+	// 数据库初始化的操作
 	if err := model.Initial(c.Mysql.DataSource); err != nil {
 		fmt.Printf("%+v", err)
 		return

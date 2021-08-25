@@ -11,9 +11,9 @@ type (
 	}
 
 	FindUserResp {
-		Code    int    `json:"code"`
-		Message string `json:"message"`
-		Data    string `json:"data"`
+		Code    int     `json:"code"`
+		Message string  `json:"message"`
+		Data    OneUser `json:"data"`
 	}
 
 	OneUser {

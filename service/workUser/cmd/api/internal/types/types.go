@@ -13,9 +13,9 @@ type CreateUserResp struct {
 }
 
 type FindUserResp struct {
-	Code    int    `json:"code"`
-	Message string `json:"message"`
-	Data    string `json:"data"`
+	Code    int     `json:"code"`
+	Message string  `json:"message"`
+	Data    OneUser `json:"data"`
 }
 
 type OneUser struct {

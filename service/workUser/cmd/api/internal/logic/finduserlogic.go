@@ -2,7 +2,9 @@ package logic
 
 import (
 	"context"
+	"github.com/pkg/errors"
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/utils/constvar"
+	"strconv"
 
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/svc"
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/types"
@@ -25,12 +27,25 @@ func NewFindUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) FindUserL
 }
 
 func (l *FindUserLogic) FindUser() (*types.FindUserResp, error) {
-	// todo: add your logic here and delete this line
-	userIdStr := l.ctx.Value("userId")
+	userIdStr, isOk := l.ctx.Value("userId").(string)
+	if !isOk {
+		return nil, errors.New("参数 userId 不合法。")
+	}
+	userId, err := strconv.ParseInt(userIdStr, 10, 64)
+	if err != nil {
+		return nil, errors.Wrap(err, "parse int error")
+	}
+	res, err := l.svcCtx.WorkUserModel.FindOne(userId)
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.FindUserResp{
 		Code:    constvar.Ok,
 		Message: "success",
-		Data:    userIdStr.(string),
+		Data: types.OneUser{
+			Id:       int64(res.ID),
+			UserName: res.UserName,
+		},
 	}, nil
 }

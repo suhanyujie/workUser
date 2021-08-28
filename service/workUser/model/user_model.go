@@ -22,10 +22,11 @@ var (
 
 type (
 	WorkUserModelIf interface {
+		GetList(params map[string]interface{}) (total int64, list []WorkUser, err error)
 		Insert(data WorkUser) (*WorkUser, error)
 		FindOne(id int64) (*WorkUser, error)
-		FindOneByUserName(user string) (*WorkUser, error)
-		Update(data WorkUser) error
+		FindOneByUserName(user string) ([]WorkUser, error)
+		Update(id int64, updateData map[string]interface{}) error
 		Delete(id int64) error
 	}
 
@@ -48,6 +49,46 @@ func (WorkUser) TableName() string {
 
 func NewWorkUserModel() *WorkUser {
 	return &WorkUser{}
+}
+
+func (_this *WorkUser) GetList(params map[string]interface{}) (total int64, list []WorkUser, err error) {
+	list = make([]WorkUser, 0)
+
+	conn := DB.Table(_this.TableName())
+	if tmpVal, ok := params["ids"]; ok {
+		idArr := tmpVal.([]int64)
+		conn.Where("id in (?)", idArr)
+	}
+	// 模糊匹配
+	if tmpVal, ok := params["userName"]; ok {
+		userName := tmpVal.(string)
+		likeFmt := fmt.Sprintf("%%%s%%", userName)
+		conn.Where("user_name like ?", likeFmt)
+	}
+	err = conn.Count(&total).Error
+	if err != nil {
+		err = errors.Wrap(err, "getList count error. ")
+		return
+	}
+	// 处理分页
+	page, size := 1, 20
+	if tmpVal, ok := params["page"]; ok {
+		page = tmpVal.(int)
+	}
+	if tmpVal, ok := params["size"]; ok {
+		size = tmpVal.(int)
+	}
+	offset := (page - 1) * size
+	if offset < 0 {
+		offset = 0
+	}
+	err = conn.Find(&list).Offset(offset).Limit(size).Error
+	if err != nil {
+		err = errors.Wrap(err, "getList find error. ")
+		return
+	}
+
+	return
 }
 
 // Insert 创建

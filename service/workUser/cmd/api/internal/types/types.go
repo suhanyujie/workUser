@@ -23,6 +23,24 @@ type OneUser struct {
 	UserName string `json:"userName"`
 }
 
+type UserListReq struct {
+	Ids      []int64 `json:"ids,omitempty"`
+	NickName string  `json:"nickName,omitempty"`
+}
+
+type UserListRespVo struct {
+	Code    int                `json:"code"`
+	Message string             `json:"message"`
+	Data    UserListRespVoData `json:"data"`
+}
+
+type UserListRespVoData struct {
+	List  []OneUser `json:"list"`
+	Total int64     `json:"total"`
+	Page  int       `json:"page"`
+	Size  int       `json:"size"`
+}
+
 type Request struct {
 	Name string `path:"name,options=you|me"`
 }

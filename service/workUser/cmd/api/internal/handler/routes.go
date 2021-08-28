@@ -22,6 +22,11 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/user/find/:userId",
 				Handler: FindUserHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/list",
+				Handler: UserListHandler(serverCtx),
+			},
 		},
 	)
 }

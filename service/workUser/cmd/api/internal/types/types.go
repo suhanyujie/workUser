@@ -24,8 +24,8 @@ type OneUser struct {
 }
 
 type UserListReq struct {
-	Ids      []int64 `json:"ids,omitempty"`
-	NickName string  `json:"nickName,omitempty"`
+	Ids      []int64 `json:"ids,optional"`
+	NickName string  `json:"nickName,optional"`
 }
 
 type UserListRespVo struct {
@@ -45,8 +45,14 @@ type Request struct {
 	Name string `path:"name,options=you|me"`
 }
 
-type Response struct {
-	Code    int    `json:"code"`
-	Message string `json:"message"`
-	Data    string `json:"data"`
+type ResponseVo struct {
+	Code    int         `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
+}
+
+type IsOkResponse struct {
+	Code    int         `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
 }

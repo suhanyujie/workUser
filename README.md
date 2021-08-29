@@ -6,7 +6,7 @@
 
 ## 开发三部曲
 ### 创建网关
-创建 xxx.api 文件，并运行 `goctl api go -api xxx.api -dir .`
+创建 xxx.api 文件，并运行 `goctl api go -api xxx.api -dir .`。本项目写的是用户服务，对应的命令就是 `goctl api go -api workUser.api -dir .`
 ### 创建服务的 rpc
 ### 编写服务逻辑
 ### 启动服务并测试

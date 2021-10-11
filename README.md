@@ -55,3 +55,4 @@ service workUser-api {
 * https://github.com/tal-tech/zero-doc/blob/main/doc/shorturl.md
 * 文档 https://go-zero.dev/cn/quick-start.html 
 * go-zero 实现的中台 https://github.com/jackluo2012/datacenter
+* go-zero 实践（多图详解万星 Restful 框架原理与实现） https://mp.weixin.qq.com/s/0cJj_H5kUJjYdz2btBbGWA

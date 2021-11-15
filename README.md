@@ -7,6 +7,7 @@
 ## 开发三部曲
 ### 创建网关
 创建 xxx.api 文件，并运行 `goctl api go -api xxx.api -dir .`。本项目写的是用户服务，对应的命令就是 `goctl api go -api workUser.api -dir .`
+
 ### 创建服务的 rpc
 ### 编写服务逻辑
 ### 启动服务并测试
@@ -15,9 +16,9 @@
 * `go run workuser.go -f etc/workuser-api.yaml`
 
 ## 功能 list
-* [ ] 用户新增
-* [ ] 用户修改
-* [ ] 用户删除
+* [*] 用户新增
+* [*] 用户修改
+* [*] 用户删除
 * [ ] 三方用户新增/同步
 * [ ] 三方用户修改
 * [ ] 三方用户删除
@@ -27,15 +28,13 @@
 ```
 service workUser-api {
 	@handler CreateUser
-	post /user/create(CreateUserReq) returns (CreateUserResp);
-	@handler QueryUser
-	post /user/list(Request) returns (Response);
+	post /user/create(CreateUserReq) returns(CreateUserResp)
 	@handler FindUser
-	get /user/find(Request) returns (Response);
-	@handler UpdateUser
-	post /user/update(Request) returns (Response);
-	@handler DeleteUser
-	delete /user/delete(Request) returns (Response);
+	get /user/find/:userId () returns(FindUserResp)
+	@handler UserList
+	post /user/list(UserListReq) returns(UserListRespVo)
+	@handler UserDelete
+	delete /user/delete/:userId () returns(ResponseVo)
 }
 ```
 
@@ -47,8 +46,6 @@ service workUser-api {
 ## 遇到的问题
 * 使用路由不确定如何获取参数，如 `/user/find/:userId`，如何获取 userId 呢？
 * 没有 orm 的介绍，不知道如何 migration
-
-
 
 ## 参考资料
 * https://github.com/tal-tech/zero-doc

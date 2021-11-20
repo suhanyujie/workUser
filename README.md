@@ -13,15 +13,17 @@
 ### 启动服务并测试
 
 ## 启动服务
-* `go run workuser.go -f etc/workuser-api.yaml`
+`cd service/workUser/cmd/api`，启动服务 `go run workuser.go -f etc/workuser-api.yaml`
+
+通过 `curl --request POST 'http://127.0.0.1:8001/user/list'` 可以获取用户列表，用于检查接口是否正常调用。
 
 ## 功能 list
 * [*] 用户新增
 * [*] 用户修改
 * [*] 用户删除
-* [ ] 三方用户新增/同步
-* [ ] 三方用户修改
-* [ ] 三方用户删除
+* ~~[ ] 三方用户新增/同步~~
+* ~~[ ] 三方用户修改~~
+* ~~[ ] 三方用户删除~~
 
 ### 接口
 
@@ -53,3 +55,4 @@ service workUser-api {
 * 文档 https://go-zero.dev/cn/quick-start.html 
 * go-zero 实现的中台 https://github.com/jackluo2012/datacenter
 * go-zero 实践（多图详解万星 Restful 框架原理与实现） https://mp.weixin.qq.com/s/0cJj_H5kUJjYdz2btBbGWA
+* go-zero 实战之 blog 系统 https://xie.infoq.cn/article/d85e2f60d6665c7513e9b4846

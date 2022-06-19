@@ -4,15 +4,16 @@
 主要提供用户的管理，包含用户的新增、信息修改、删除、三方用户接入等接口等
 
 ## 启动
-* `go run workuser.go -f etc/workuser-api.yaml`
+```shell
+go run service/workUser/cmd/api/workuser.go -f service/workUser/cmd/api/etc/workuser-api.yaml
+```
+
 
 ## 功能 list
-* [ ] 用户新增
+* [x] 用户新增
 * [ ] 用户修改
 * [ ] 用户删除
-* [ ] 三方用户新增/同步
-* [ ] 三方用户修改
-* [ ] 三方用户删除
+* [ ] 用户查询
 
 ## 设计
 
@@ -35,15 +36,12 @@ service workUser-api {
 ```
 
 #### 新增用户
-
 #### 修改用户信息
 #### 删除用户
 
 ## 遇到的问题
 * 使用路由不确定如何获取参数，如 `/user/find/:userId`，如何获取 userId 呢？
 * 没有 orm 的介绍，不知道如何 migration
-
-
 
 ## 参考资料
 * https://github.com/tal-tech/zero-doc

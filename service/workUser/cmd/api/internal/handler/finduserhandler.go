@@ -5,7 +5,7 @@ import (
 
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/logic"
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/svc"
-	"github.com/tal-tech/go-zero/rest/httpx"
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func FindUserHandler(ctx *svc.ServiceContext) http.HandlerFunc {

@@ -10,7 +10,7 @@ import (
 
 	"github.com/suhanyujie/workUser/service/workUser/cmd/rpc/user/user"
 
-	"github.com/tal-tech/go-zero/zrpc"
+	"github.com/zeromicro/go-zero/zrpc"
 )
 
 type (

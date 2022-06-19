@@ -8,8 +8,8 @@ import (
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/handler"
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/svc"
 
-	"github.com/tal-tech/go-zero/core/conf"
-	"github.com/tal-tech/go-zero/rest"
+	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/rest"
 )
 
 var configFile = flag.String("f", "etc/workUser-api.yaml", "the config file")

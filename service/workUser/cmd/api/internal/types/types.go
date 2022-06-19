@@ -18,6 +18,18 @@ type FindUserResp struct {
 	Data    string `json:"data"`
 }
 
+type GetUserListReq struct {
+	Keyword string `json:"keyword"`
+	Page    int    `json:"page"`
+	Size    int    `json:"size"`
+}
+
+type GetUserListResp struct {
+	Id       int64  `json:"id"`
+	Name     string `json:"name"`
+	UserName string `json:"userName"`
+}
+
 type Request struct {
 	Name string `path:"name,options=you|me"`
 }

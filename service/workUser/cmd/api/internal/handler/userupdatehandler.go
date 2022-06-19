@@ -7,7 +7,7 @@ import (
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/svc"
 	"github.com/suhanyujie/workUser/service/workUser/cmd/api/internal/types"
 
-	"github.com/tal-tech/go-zero/rest/httpx"
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func UserUpdateHandler(ctx *svc.ServiceContext) http.HandlerFunc {

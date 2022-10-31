@@ -44,6 +44,7 @@ service workUser-api {
 * 没有 orm 的介绍，不知道如何 migration
 
 ## 参考资料
+* go-zero 文档 https://legacy.go-zero.dev/cn/
+* 文档 https://go-zero.dev/cn/
 * https://github.com/tal-tech/zero-doc
 * https://github.com/tal-tech/zero-doc/blob/main/doc/shorturl.md
-* 文档 https://zero.gocn.vip/zero/

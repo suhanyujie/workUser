@@ -27,6 +27,7 @@ func NewCreateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) CreateU
 
 func (l *CreateUserLogic) CreateUser(req types.CreateUserReq) (*types.CreateUserResp, error) {
 	// todo: add your logic here and delete this line
+	// 通过 username pwd 邮箱创建一个新用户 todo
 
 	return &types.CreateUserResp{
 		Code:    constvar.Ok,

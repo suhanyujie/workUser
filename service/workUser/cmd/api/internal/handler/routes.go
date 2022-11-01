@@ -9,8 +9,8 @@ import (
 	"github.com/zeromicro/go-zero/rest"
 )
 
-func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
-	server.AddRoutes(
+func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
+	engine.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
@@ -25,7 +25,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/user/list",
-				Handler: GetUserListHandler(serverCtx),
+				Handler: UserListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/user/delete/:userId",
+				Handler: UserDeleteHandler(serverCtx),
 			},
 		},
 	)

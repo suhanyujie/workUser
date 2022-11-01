@@ -1,29 +1,44 @@
+syntax = "v2"
+
 type (
 	CreateUserReq {
-		Name string `json:"name"`
-		Pwd  string `json:"name"`
+		UserName string `json:"userName"`
+		Pwd      string `json:"pwd"`
 	}
 
 	CreateUserResp {
-		Code    int    `json:"code"`
-		Message string `json:"message"`
-		Data    string `json:"data"`
-	}
-	FindUserResp {
-		Code    int    `json:"code"`
-		Message string `json:"message"`
-		Data    string `json:"data"`
+		Code    int     `json:"code"`
+		Message string  `json:"message"`
+		Data    OneUser `json:"data"`
 	}
 
-	GetUserListReq {
-		Keyword string `json:"keyword"`
-		Page    int    `json:"page"`
-		Size    int    `json:"size"`
+	FindUserResp {
+		Code    int     `json:"code"`
+		Message string  `json:"message"`
+		Data    OneUser `json:"data"`
 	}
-	GetUserListResp {
+
+	OneUser {
 		Id       int64  `json:"id"`
-		Name     string `json:"name"`
 		UserName string `json:"userName"`
+	}
+
+	UserListReq {
+		Ids      []int64 `json:"ids,optional"`
+		NickName string  `json:"nickName,optional"`
+	}
+
+	UserListRespVo {
+		Code    int                `json:"code"`
+		Message string             `json:"message"`
+		Data    UserListRespVoData `json:"data"`
+	}
+
+	UserListRespVoData {
+		List  []OneUser `json:"list"`
+		Total int64     `json:"total"`
+		Page  int       `json:"page"`
+		Size  int       `json:"size"`
 	}
 )
 
@@ -31,17 +46,24 @@ type Request {
 	Name string `path:"name,options=you|me"`
 }
 
-type Response {
-	Code    int    `json:"code"`
-	Message string `json:"message"`
-	Data    string `json:"data"`
+type ResponseVo {
+	Code    int         `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
+}
+type IsOkResponse {
+	Code    int         `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
 }
 
 service workUser-api {
 	@handler CreateUser
 	post /user/create(CreateUserReq) returns(CreateUserResp)
 	@handler FindUser
-	get /user/find/:userId returns(FindUserResp)
-	@handler GetUserList
-	post /user/list(GetUserListReq) returns(GetUserListResp)
+	get /user/find/:userId () returns(FindUserResp)
+	@handler UserList
+	post /user/list(UserListReq) returns(UserListRespVo)
+	@handler UserDelete
+	delete /user/delete/:userId () returns(ResponseVo)
 }

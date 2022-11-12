@@ -2,6 +2,7 @@ CREATE TABLE `user` (
     `id` int NOT NULL AUTO_INCREMENT,
     `username` varchar(100) COLLATE utf8mb4_bin NOT NULL,
     `nick_name` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+    `avatar` varchar(200) COLLATE utf8mb4_bin NOT NULL COMMENT '头像地址',
     `status` tinyint NOT NULL DEFAULT '0',
     `pwd` varchar(100) COLLATE utf8mb4_bin NOT NULL,
     `pwd_token` varchar(100) COLLATE utf8mb4_bin NOT NULL,

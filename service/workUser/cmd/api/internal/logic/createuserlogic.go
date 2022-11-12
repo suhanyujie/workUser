@@ -33,6 +33,8 @@ func (l *CreateUserLogic) CreateUser(req types.CreateUserReq) (*types.CreateUser
 		Pwd:      stringx.Md5Str(req.Pwd),
 		Nickname: req.UserName,
 		Sex:      0,
+		Updater:  -1,
+		Creator:  -1,
 	})
 	if err != nil {
 		return nil, err

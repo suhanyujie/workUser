@@ -33,13 +33,15 @@ type (
 	WorkUser struct {
 		BaseModel
 
-		UserName string `gorm:"comment:用户名;size:50"`         // 用户名
-		Pwd      string `gorm:"comment:密码;size:128"`         // 密码
-		Token    string `gorm:"comment:密码加密的 token;size:50"` // 密码加密的 token
-		Nickname string `gorm:"comment:昵称;size:200"`         // 昵称
-		Sex      int    `gorm:"comment:性别"`                  // 性别
-		Avatar   string `gorm:"comment:头像;size:200"`         // 头像
-		Ext      string `gorm:"comment:预留的扩展字段"`             // 预留的扩展字段
+		UserName string `gorm:"comment:用户名;size:50;column:username" json:"username"`  // 用户名
+		Nickname string `gorm:"comment:昵称;size:200;column:nick_name" json:"nickName"` // 昵称
+		Pwd      string `gorm:"comment:密码;size:128" json:"pwd"`                       // 密码
+		Token    string `gorm:"comment:密码加密的 token;size:50" json:"token"`             // 密码加密的 token
+		Sex      int8   `gorm:"comment:性别;default:0" json:"sex"`                      // 性别
+		Avatar   string `gorm:"comment:头像;size:200;default:''" json:"avatar"`         // 头像
+		Creator  int    `gorm:"comment:创建人;default:0" json:"creator,omitempty"`
+		Updater  int    `gorm:"comment:修改人;default:0" json:"updater,omitempty"`
+		Ext      string `gorm:"comment:预留的扩展字段" json:"ext"` // 预留的扩展字段
 	}
 )
 

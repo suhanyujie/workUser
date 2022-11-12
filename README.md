@@ -24,9 +24,6 @@ go run service/workUser/cmd/api/workuser.go -f service/workUser/cmd/api/etc/work
 * [*] 用户新增
 * [*] 用户修改
 * [*] 用户删除
-* ~~[ ] 三方用户新增/同步~~
-* ~~[ ] 三方用户修改~~
-* ~~[ ] 三方用户删除~~
 
 ### 接口
 
